@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2023 at 02:44 PM
+-- Generation Time: Nov 19, 2023 at 09:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -324,7 +324,8 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama_pengeluaran`, `tanggal`, `bia
 ('P0017', 'Administrasi', '2024-06-01', 310000),
 ('P0018', 'Pajak', '2024-07-03', 280000),
 ('P0019', 'Pelatihan Karyawan', '2024-08-05', 240000),
-('P0020', 'Bantuan Sosial', '2024-09-07', 300000);
+('P0020', 'Bantuan Sosial', '2024-09-07', 300000),
+('P0090', 'coba', '2023-11-20', 5000);
 
 -- --------------------------------------------------------
 
@@ -337,7 +338,7 @@ CREATE TABLE `pesanan` (
   `nama_karyawan` varchar(50) NOT NULL,
   `id_customer` mediumint(6) NOT NULL,
   `id_layanan` char(5) NOT NULL,
-  `tgl_pesanan` datetime NOT NULL,
+  `tgl_pesanan` datetime NOT NULL DEFAULT current_timestamp(),
   `tgl_pesanan_selesai` date NOT NULL,
   `berat` int(2) NOT NULL,
   `status` enum('Dalam proses','Selesai','Diambil','') NOT NULL
@@ -494,7 +495,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `no_pesanan` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `no_pesanan` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1213;
 
 --
 -- Constraints for dumped tables
