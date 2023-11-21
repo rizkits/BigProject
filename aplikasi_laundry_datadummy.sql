@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 09:25 PM
+-- Generation Time: Nov 21, 2023 at 04:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,44 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `aplikasi_laundry`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akun`
---
-
-CREATE TABLE `akun` (
-  `id_akun` char(6) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `akun`
---
-
-INSERT INTO `akun` (`id_akun`, `username`, `password`) VALUES
-('A00001', 'user1', 'pass1'),
-('A00002', 'user2', 'pass2'),
-('A00003', 'user3', 'pass3'),
-('A00004', 'user4', 'pass4'),
-('A00005', 'user5', 'pass5'),
-('A00006', 'user6', 'pass6'),
-('A00007', 'user7', 'pass7'),
-('A00008', 'user8', 'pass8'),
-('A00009', 'user9', 'pass9'),
-('A00010', 'user10', 'pass10'),
-('A00011', 'user11', 'pass11'),
-('A00012', 'user12', 'pass12'),
-('A00013', 'user13', 'pass13'),
-('A00014', 'user14', 'pass14'),
-('A00015', 'user15', 'pass15'),
-('A00016', 'user16', 'pass16'),
-('A00017', 'user17', 'pass17'),
-('A00018', 'user18', 'pass18'),
-('A00019', 'user19', 'pass19'),
-('A00020', 'user20', 'pass20');
 
 -- --------------------------------------------------------
 
@@ -175,43 +137,6 @@ INSERT INTO `inventory` (`id_barang`, `nama_barang`, `jumlah_barang`) VALUES
 ('B0018', 'Pegangan Kain', 55),
 ('B0019', 'Tirai', 65),
 ('B0020', 'Vacuum', 20);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `karyawan`
---
-
-CREATE TABLE `karyawan` (
-  `nama_karyawan` varchar(50) NOT NULL,
-  `id_akun` char(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `karyawan`
---
-
-INSERT INTO `karyawan` (`nama_karyawan`, `id_akun`) VALUES
-('Karyawan 1', 'A00001'),
-('Karyawan 2', 'A00002'),
-('Karyawan 3', 'A00003'),
-('Karyawan 4', 'A00004'),
-('Karyawan 5', 'A00005'),
-('Karyawan 6', 'A00006'),
-('Karyawan 7', 'A00007'),
-('Karyawan 8', 'A00008'),
-('Karyawan 9', 'A00009'),
-('Karyawan 10', 'A00010'),
-('Karyawan 11', 'A00011'),
-('Karyawan 12', 'A00012'),
-('Karyawan 13', 'A00013'),
-('Karyawan 14', 'A00014'),
-('Karyawan 15', 'A00015'),
-('Karyawan 16', 'A00016'),
-('Karyawan 17', 'A00017'),
-('Karyawan 18', 'A00018'),
-('Karyawan 19', 'A00019'),
-('Karyawan 20', 'A00020');
 
 -- --------------------------------------------------------
 
@@ -414,12 +339,6 @@ INSERT INTO `transaksi` (`id_transaksi`, `no_pesanan`, `id_pengeluaran`, `id_lap
 --
 
 --
--- Indexes for table `akun`
---
-ALTER TABLE `akun`
-  ADD PRIMARY KEY (`id_akun`);
-
---
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -437,13 +356,6 @@ ALTER TABLE `detail_pesanan`
 --
 ALTER TABLE `inventory`
   ADD PRIMARY KEY (`id_barang`);
-
---
--- Indexes for table `karyawan`
---
-ALTER TABLE `karyawan`
-  ADD PRIMARY KEY (`nama_karyawan`),
-  ADD KEY `fk_idakun` (`id_akun`);
 
 --
 -- Indexes for table `laporan`
@@ -508,18 +420,11 @@ ALTER TABLE `detail_pesanan`
   ADD CONSTRAINT `no_pesanan` FOREIGN KEY (`no_pesanan`) REFERENCES `pesanan` (`no_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `karyawan`
---
-ALTER TABLE `karyawan`
-  ADD CONSTRAINT `fk_idakun` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id_akun`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `pesanan`
 --
 ALTER TABLE `pesanan`
   ADD CONSTRAINT `id_customer` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pesanan_ibfk_2` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`),
-  ADD CONSTRAINT `pesanan_ibfk_3` FOREIGN KEY (`nama_karyawan`) REFERENCES `karyawan` (`nama_karyawan`);
+  ADD CONSTRAINT `pesanan_ibfk_2` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`);
 
 --
 -- Constraints for table `transaksi`
