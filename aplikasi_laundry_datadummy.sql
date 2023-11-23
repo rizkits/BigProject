@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 04:56 PM
+-- Generation Time: Nov 23, 2023 at 03:40 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -67,10 +67,12 @@ INSERT INTO `customer` (`id_customer`, `nama_customer`, `alamat_customer`, `no_h
 --
 
 CREATE TABLE `detail_pesanan` (
-  `id_detail` char(8) NOT NULL,
+  `id_detail` int(8) NOT NULL,
   `no_pesanan` mediumint(8) NOT NULL,
   `jumlah_pakaian` int(2) NOT NULL,
   `total` int(6) NOT NULL,
+  `parfum` varchar(2) NOT NULL,
+  `mesin` varchar(2) NOT NULL,
   `Keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -78,27 +80,28 @@ CREATE TABLE `detail_pesanan` (
 -- Dumping data for table `detail_pesanan`
 --
 
-INSERT INTO `detail_pesanan` (`id_detail`, `no_pesanan`, `jumlah_pakaian`, `total`, `Keterangan`) VALUES
-('DP00001', 1, 10, 50000, 'Detail pesanan 1'),
-('DP00002', 2, 15, 75000, 'Detail pesanan 2'),
-('DP00003', 3, 8, 40000, 'Detail pesanan 3'),
-('DP00004', 4, 12, 60000, 'Detail pesanan 4'),
-('DP00005', 5, 6, 30000, 'Detail pesanan 5'),
-('DP00006', 6, 18, 90000, 'Detail pesanan 6'),
-('DP00007', 7, 5, 25000, 'Detail pesanan 7'),
-('DP00008', 8, 14, 70000, 'Detail pesanan 8'),
-('DP00009', 9, 20, 100000, 'Detail pesanan 9'),
-('DP00010', 10, 7, 35000, 'Detail pesanan 10'),
-('DP00011', 11, 11, 55000, 'Detail pesanan 11'),
-('DP00012', 12, 9, 45000, 'Detail pesanan 12'),
-('DP00013', 13, 16, 80000, 'Detail pesanan 13'),
-('DP00014', 14, 13, 65000, 'Detail pesanan 14'),
-('DP00015', 15, 4, 20000, 'Detail pesanan 15'),
-('DP00016', 16, 17, 85000, 'Detail pesanan 16'),
-('DP00017', 17, 12, 60000, 'Detail pesanan 17'),
-('DP00018', 18, 8, 40000, 'Detail pesanan 18'),
-('DP00019', 19, 5, 25000, 'Detail pesanan 19'),
-('DP00020', 20, 10, 50000, 'Detail pesanan 20');
+INSERT INTO `detail_pesanan` (`id_detail`, `no_pesanan`, `jumlah_pakaian`, `total`, `parfum`, `mesin`, `Keterangan`) VALUES
+(1, 1, 10, 50000, '', '', 'Detail pesanan 1'),
+(2, 2, 15, 75000, '', '', 'Detail pesanan 2'),
+(3, 3, 8, 40000, '', '', 'Detail pesanan 3'),
+(4, 4, 12, 60000, '', '', 'Detail pesanan 4'),
+(5, 5, 6, 30000, '', '', 'Detail pesanan 5'),
+(6, 6, 18, 90000, '', '', 'Detail pesanan 6'),
+(7, 7, 5, 25000, '', '', 'Detail pesanan 7'),
+(8, 8, 14, 70000, '', '', 'Detail pesanan 8'),
+(9, 9, 20, 100000, '', '', 'Detail pesanan 9'),
+(10, 10, 7, 35000, '', '', 'Detail pesanan 10'),
+(11, 11, 11, 55000, '', '', 'Detail pesanan 11'),
+(12, 12, 9, 45000, '', '', 'Detail pesanan 12'),
+(13, 13, 16, 80000, '', '', 'Detail pesanan 13'),
+(14, 14, 13, 65000, '', '', 'Detail pesanan 14'),
+(15, 15, 4, 20000, '', '', 'Detail pesanan 15'),
+(16, 16, 17, 85000, '', '', 'Detail pesanan 16'),
+(17, 17, 12, 60000, '', '', 'Detail pesanan 17'),
+(18, 18, 8, 40000, '', '', 'Detail pesanan 18'),
+(19, 19, 5, 25000, '', '', 'Detail pesanan 19'),
+(20, 20, 10, 50000, '', '', 'Detail pesanan 20'),
+(21, 11, 2, 20000, '1', '2', 'fe');
 
 -- --------------------------------------------------------
 
@@ -145,34 +148,8 @@ INSERT INTO `inventory` (`id_barang`, `nama_barang`, `jumlah_barang`) VALUES
 --
 
 CREATE TABLE `laporan` (
-  `id_laporan` char(5) NOT NULL
+  `id_laporan` mediumint(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `laporan`
---
-
-INSERT INTO `laporan` (`id_laporan`) VALUES
-('L0001'),
-('L0002'),
-('L0003'),
-('L0004'),
-('L0005'),
-('L0006'),
-('L0007'),
-('L0008'),
-('L0009'),
-('L0010'),
-('L0011'),
-('L0012'),
-('L0013'),
-('L0014'),
-('L0015'),
-('L0016'),
-('L0017'),
-('L0018'),
-('L0019'),
-('L0020');
 
 -- --------------------------------------------------------
 
@@ -219,7 +196,7 @@ INSERT INTO `layanan` (`id_layanan`, `nama_layanan`, `harga/2kg`) VALUES
 --
 
 CREATE TABLE `pengeluaran` (
-  `id_pengeluaran` char(5) NOT NULL,
+  `id_pengeluaran` mediumint(5) NOT NULL,
   `nama_pengeluaran` varchar(30) NOT NULL,
   `tanggal` date NOT NULL,
   `biaya` int(6) NOT NULL
@@ -230,27 +207,27 @@ CREATE TABLE `pengeluaran` (
 --
 
 INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama_pengeluaran`, `tanggal`, `biaya`) VALUES
-('P0001', 'Deterjen', '2023-01-01', 150000),
-('P0002', 'Air', '2023-02-03', 120000),
-('P0003', 'Listrik', '2023-03-05', 80000),
-('P0004', 'Tenaga Kerja', '2023-04-07', 200000),
-('P0005', 'Maintenance Mesin', '2023-05-09', 180000),
-('P0006', 'Bahan Bakar', '2023-06-11', 250000),
-('P0007', 'Peralatan Cuci', '2023-07-13', 220000),
-('P0008', 'Transportasi', '2023-08-15', 300000),
-('P0009', 'Peralatan Setrika', '2023-09-17', 270000),
-('P0010', 'Peralatan Tambahan', '2023-10-19', 230000),
-('P0011', 'Perlengkapan Karyawan', '2023-11-21', 280000),
-('P0012', 'Kemasan', '2023-12-23', 190000),
-('P0013', 'Komunikasi', '2024-01-25', 320000),
-('P0014', 'Promosi', '2024-02-27', 270000),
-('P0015', 'Sewa Tempat', '2024-03-29', 230000),
-('P0016', 'Asuransi', '2024-04-30', 350000),
-('P0017', 'Administrasi', '2024-06-01', 310000),
-('P0018', 'Pajak', '2024-07-03', 280000),
-('P0019', 'Pelatihan Karyawan', '2024-08-05', 240000),
-('P0020', 'Bantuan Sosial', '2024-09-07', 300000),
-('P0090', 'coba', '2023-11-20', 5000);
+(1, 'Deterjen', '2023-01-01', 150000),
+(2, 'Air', '2023-02-03', 120000),
+(3, 'Listrik', '2023-03-05', 80000),
+(4, 'Tenaga Kerja', '2023-04-07', 200000),
+(5, 'Maintenance Mesin', '2023-05-09', 180000),
+(6, 'Bahan Bakar', '2023-06-11', 250000),
+(7, 'Peralatan Cuci', '2023-07-13', 220000),
+(8, 'Transportasi', '2023-08-15', 300000),
+(9, 'Peralatan Setrika', '2023-09-17', 270000),
+(10, 'Peralatan Tambahan', '2023-10-19', 230000),
+(11, 'Perlengkapan Karyawan', '2023-11-21', 280000),
+(12, 'Kemasan', '2023-12-23', 190000),
+(13, 'Komunikasi', '2024-01-25', 320000),
+(14, 'Promosi', '2024-02-27', 270000),
+(15, 'Sewa Tempat', '2024-03-29', 230000),
+(16, 'Asuransi', '2024-04-30', 350000),
+(17, 'Administrasi', '2024-06-01', 310000),
+(18, 'Pajak', '2024-07-03', 280000),
+(19, 'Pelatihan Karyawan', '2024-08-05', 240000),
+(20, 'Bantuan Sosial', '2024-09-07', 300000),
+(21, 'coba', '2023-11-20', 5000);
 
 -- --------------------------------------------------------
 
@@ -260,12 +237,12 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama_pengeluaran`, `tanggal`, `bia
 
 CREATE TABLE `pesanan` (
   `no_pesanan` mediumint(8) NOT NULL,
-  `nama_karyawan` varchar(50) NOT NULL,
   `id_customer` mediumint(6) NOT NULL,
   `id_layanan` char(5) NOT NULL,
   `tgl_pesanan` datetime NOT NULL DEFAULT current_timestamp(),
   `tgl_pesanan_selesai` date NOT NULL,
   `berat` int(2) NOT NULL,
+  `jumlah` int(2) DEFAULT NULL,
   `status` enum('Dalam proses','Selesai','Diambil','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -273,27 +250,27 @@ CREATE TABLE `pesanan` (
 -- Dumping data for table `pesanan`
 --
 
-INSERT INTO `pesanan` (`no_pesanan`, `nama_karyawan`, `id_customer`, `id_layanan`, `tgl_pesanan`, `tgl_pesanan_selesai`, `berat`, `status`) VALUES
-(1, 'Karyawan 1', 1, 'L0001', '2023-11-17 12:00:00', '2023-11-20', 5, 'Dalam proses'),
-(2, 'Karyawan 2', 2, 'L0002', '2023-11-18 10:30:00', '2023-11-21', 7, 'Selesai'),
-(3, 'Karyawan 3', 3, 'L0003', '2023-11-19 14:45:00', '2023-11-22', 3, 'Diambil'),
-(4, 'Karyawan 4', 4, 'L0004', '2023-11-20 08:15:00', '2023-11-23', 6, 'Dalam proses'),
-(5, 'Karyawan 5', 5, 'L0005', '2023-11-21 16:20:00', '2023-11-24', 4, 'Selesai'),
-(6, 'Karyawan 6', 6, 'L0006', '2023-11-22 11:30:00', '2023-11-25', 8, 'Diambil'),
-(7, 'Karyawan 7', 7, 'L0007', '2023-11-23 09:45:00', '2023-11-26', 2, 'Dalam proses'),
-(8, 'Karyawan 8', 8, 'L0008', '2023-11-24 13:15:00', '2023-11-27', 5, 'Selesai'),
-(9, 'Karyawan 9', 9, 'L0009', '2023-11-25 15:30:00', '2023-11-28', 7, 'Diambil'),
-(10, 'Karyawan 10', 10, 'L0010', '2023-11-26 17:20:00', '2023-11-29', 3, 'Dalam proses'),
-(11, 'Karyawan 11', 11, 'L0011', '2023-11-27 10:00:00', '2023-11-30', 6, 'Selesai'),
-(12, 'Karyawan 12', 12, 'L0012', '2023-11-28 12:45:00', '2023-12-01', 4, 'Diambil'),
-(13, 'Karyawan 13', 13, 'L0013', '2023-11-29 08:30:00', '2023-12-02', 8, 'Dalam proses'),
-(14, 'Karyawan 14', 14, 'L0014', '2023-11-30 14:20:00', '2023-12-03', 5, 'Selesai'),
-(15, 'Karyawan 15', 15, 'L0015', '2023-12-01 11:00:00', '2023-12-04', 3, 'Diambil'),
-(16, 'Karyawan 16', 16, 'L0016', '2023-12-02 13:45:00', '2023-12-05', 7, 'Dalam proses'),
-(17, 'Karyawan 17', 17, 'L0017', '2023-12-03 09:30:00', '2023-12-06', 6, 'Selesai'),
-(18, 'Karyawan 18', 18, 'L0018', '2023-12-04 16:20:00', '2023-12-07', 4, 'Diambil'),
-(19, 'Karyawan 19', 19, 'L0019', '2023-12-05 14:15:00', '2023-12-08', 2, 'Dalam proses'),
-(20, 'Karyawan 20', 20, 'L0020', '2023-12-06 12:30:00', '2023-12-09', 5, 'Selesai');
+INSERT INTO `pesanan` (`no_pesanan`, `id_customer`, `id_layanan`, `tgl_pesanan`, `tgl_pesanan_selesai`, `berat`, `jumlah`, `status`) VALUES
+(1, 1, 'L0001', '2023-11-17 12:00:00', '2023-11-20', 5, 0, 'Dalam proses'),
+(2, 2, 'L0002', '2023-11-18 10:30:00', '2023-11-21', 7, 0, 'Selesai'),
+(3, 3, 'L0003', '2023-11-19 14:45:00', '2023-11-22', 3, 0, 'Diambil'),
+(4, 4, 'L0004', '2023-11-20 08:15:00', '2023-11-23', 6, 0, 'Dalam proses'),
+(5, 5, 'L0005', '2023-11-21 16:20:00', '2023-11-24', 4, 0, 'Selesai'),
+(6, 6, 'L0006', '2023-11-22 11:30:00', '2023-11-25', 8, 0, 'Diambil'),
+(7, 7, 'L0007', '2023-11-23 09:45:00', '2023-11-26', 2, 0, 'Dalam proses'),
+(8, 8, 'L0008', '2023-11-24 13:15:00', '2023-11-27', 5, 0, 'Selesai'),
+(9, 9, 'L0009', '2023-11-25 15:30:00', '2023-11-28', 7, 0, 'Diambil'),
+(10, 10, 'L0010', '2023-11-26 17:20:00', '2023-11-29', 3, 0, 'Dalam proses'),
+(11, 11, 'L0011', '2023-11-27 10:00:00', '2023-11-30', 6, 0, 'Selesai'),
+(12, 12, 'L0012', '2023-11-28 12:45:00', '2023-12-01', 4, 0, 'Diambil'),
+(13, 13, 'L0013', '2023-11-29 08:30:00', '2023-12-02', 8, 0, 'Dalam proses'),
+(14, 14, 'L0014', '2023-11-30 14:20:00', '2023-12-03', 5, 0, 'Selesai'),
+(15, 15, 'L0015', '2023-12-01 11:00:00', '2023-12-04', 3, 0, 'Diambil'),
+(16, 16, 'L0016', '2023-12-02 13:45:00', '2023-12-05', 7, 0, 'Dalam proses'),
+(17, 17, 'L0017', '2023-12-03 09:30:00', '2023-12-06', 6, 0, 'Selesai'),
+(18, 18, 'L0018', '2023-12-04 16:20:00', '2023-12-07', 4, 0, 'Diambil'),
+(19, 19, 'L0019', '2023-12-05 14:15:00', '2023-12-08', 2, 0, 'Dalam proses'),
+(20, 20, 'L0020', '2023-12-06 12:30:00', '2023-12-09', 5, 0, 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -302,37 +279,11 @@ INSERT INTO `pesanan` (`no_pesanan`, `nama_karyawan`, `id_customer`, `id_layanan
 --
 
 CREATE TABLE `transaksi` (
-  `id_transaksi` char(8) NOT NULL,
+  `id_transaksi` int(8) NOT NULL,
   `no_pesanan` mediumint(8) NOT NULL,
-  `id_pengeluaran` char(5) NOT NULL,
-  `id_laporan` char(5) NOT NULL
+  `id_pengeluaran` mediumint(5) NOT NULL,
+  `id_laporan` mediumint(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id_transaksi`, `no_pesanan`, `id_pengeluaran`, `id_laporan`) VALUES
-('T0000001', 1, 'P0001', 'L0001'),
-('T0000002', 2, 'P0002', 'L0002'),
-('T0000003', 3, 'P0003', 'L0003'),
-('T0000004', 4, 'P0004', 'L0004'),
-('T0000005', 5, 'P0005', 'L0005'),
-('T0000006', 6, 'P0006', 'L0006'),
-('T0000007', 7, 'P0007', 'L0007'),
-('T0000008', 8, 'P0008', 'L0008'),
-('T0000009', 9, 'P0009', 'L0009'),
-('T0000010', 10, 'P0010', 'L0010'),
-('T0000011', 11, 'P0011', 'L0011'),
-('T0000012', 12, 'P0012', 'L0012'),
-('T0000013', 13, 'P0013', 'L0013'),
-('T0000014', 14, 'P0014', 'L0014'),
-('T0000015', 15, 'P0015', 'L0015'),
-('T0000016', 16, 'P0016', 'L0016'),
-('T0000017', 17, 'P0017', 'L0017'),
-('T0000018', 18, 'P0018', 'L0018'),
-('T0000019', 19, 'P0019', 'L0019'),
-('T0000020', 20, 'P0020', 'L0020');
 
 --
 -- Indexes for dumped tables
@@ -381,7 +332,6 @@ ALTER TABLE `pengeluaran`
 ALTER TABLE `pesanan`
   ADD PRIMARY KEY (`no_pesanan`),
   ADD KEY `id_layanan` (`id_layanan`),
-  ADD KEY `nama_karyawan` (`nama_karyawan`),
   ADD KEY `id_customer` (`id_customer`);
 
 --
@@ -389,9 +339,9 @@ ALTER TABLE `pesanan`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `id_laporan` (`id_laporan`),
-  ADD KEY `id_pengeluaran` (`id_pengeluaran`),
-  ADD KEY `no_pesanan2` (`no_pesanan`);
+  ADD KEY `no_pesanan2` (`no_pesanan`),
+  ADD KEY `laporan_transaksi` (`id_laporan`),
+  ADD KEY `idpengeluaran` (`id_pengeluaran`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -404,10 +354,34 @@ ALTER TABLE `customer`
   MODIFY `id_customer` mediumint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `detail_pesanan`
+--
+ALTER TABLE `detail_pesanan`
+  MODIFY `id_detail` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `laporan`
+--
+ALTER TABLE `laporan`
+  MODIFY `id_laporan` mediumint(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pengeluaran`
+--
+ALTER TABLE `pengeluaran`
+  MODIFY `id_pengeluaran` mediumint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
   MODIFY `no_pesanan` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1213;
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` int(8) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -430,9 +404,9 @@ ALTER TABLE `pesanan`
 -- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `no_pesanan2` FOREIGN KEY (`no_pesanan`) REFERENCES `pesanan` (`no_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_laporan`) REFERENCES `laporan` (`id_laporan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`id_pengeluaran`) REFERENCES `pengeluaran` (`id_pengeluaran`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `idpengeluaran` FOREIGN KEY (`id_pengeluaran`) REFERENCES `pengeluaran` (`id_pengeluaran`),
+  ADD CONSTRAINT `laporan_transaksi` FOREIGN KEY (`id_laporan`) REFERENCES `laporan` (`id_laporan`),
+  ADD CONSTRAINT `no_pesanan2` FOREIGN KEY (`no_pesanan`) REFERENCES `pesanan` (`no_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
