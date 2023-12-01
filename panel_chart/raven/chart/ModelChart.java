@@ -38,4 +38,8 @@ public class ModelChart {
         }
         return max;
     }
+    public void clearData() {
+        label = null;
+        values = new double[0];
+    }
 }

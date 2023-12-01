@@ -57,10 +57,10 @@ public class ModelData {
         this.profit = profit;
     }
 //    public ModelData(String month, double amount, double cost, double profit){
-    public ModelData(String month, double amount, double cost){
+    public ModelData(String month, double amount){
         this.month=month;
         this.amount=amount;
-        this.cost=cost;
+//        this.cost=cost;
 //        this.profit=profit;
     }
     public ModelData(){

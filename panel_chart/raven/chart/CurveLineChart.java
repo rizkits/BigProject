@@ -76,6 +76,24 @@ public class CurveLineChart extends JComponent {
         initAnimatorLabel();
     }
 
+    public void resetChart() {
+        // Clear the data in the model list
+        model.clear();
+
+        // Reset other properties as needed
+        selectedIndex = -1;
+        alphaLable = 0f;
+        currentPoint = 0f;
+
+        // Stop any running animators
+        animator.stop();
+        animatorChange.stop();
+        animatorLabel.stop();
+
+        // Repaint the chart
+        repaint();
+    }
+
     private void createAnimatorChart() {
         TimingTarget target = new TimingTargetAdapter() {
             @Override
